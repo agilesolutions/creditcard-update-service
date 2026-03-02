@@ -36,18 +36,21 @@ public class SecurityConfig {
     private final UserDetailsServiceImpl  userDetailsService;
 
     private static final String[] PUBLIC_ENDPOINTS = {
+            "/h2-console/**",
             "/auth/**",
+            "/audit/**",
             "/swagger-ui/**",
             "/swagger-ui.html",
             "/v3/api-docs/**",
             "/actuator/health",
-            "/actuator/info"
+            "/actuator/info",
     };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
         return http
+                .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(s -> s.sessionCreationPolicy(
                         SessionCreationPolicy.STATELESS))
