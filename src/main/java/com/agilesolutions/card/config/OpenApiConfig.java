@@ -16,8 +16,7 @@ import org.springframework.context.annotation.Configuration;
         version     = "1.0.0",
         contact     = @Contact(name  = "Agile Solutions",
                                email = "support@agilesolutions.com")
-    ),
-    servers = { @Server(url = "/api/v1", description = "Default") }
+    )
 )
 @SecurityScheme(
     name         = "bearerAuth",

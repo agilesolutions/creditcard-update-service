@@ -11,13 +11,9 @@ import lombok.*;
  */
 @Getter
 @RequiredArgsConstructor
-public enum CardStatus {
-
-    ACTIVE("Y",   "Active"),
-    INACTIVE("N", "Inactive");
+public enum CardStatus {Y("Y"), N("N");
 
     private final String code;
-    private final String description;
 
     @JsonCreator
     public static CardStatus fromCode(String code) {

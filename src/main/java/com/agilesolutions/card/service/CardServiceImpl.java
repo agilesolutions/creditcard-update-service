@@ -98,7 +98,7 @@ public class CardServiceImpl implements CardService {
         Card card = findCardOrThrow(cardNum);
 
         // COBOL: IF CARD-ACTIVE-STATUS = 'N' PERFORM SEND-ERRMSG
-        if (card.getActiveStatus() == CardStatus.INACTIVE) {
+        if (card.getActiveStatus() == CardStatus.Y) {
             throw new BusinessValidationException(
                     CardConstants.ERR_CARD_INACTIVE,
                     "Cannot update inactive card: " + cardNum);
@@ -134,7 +134,7 @@ public class CardServiceImpl implements CardService {
         log.info("Deactivating card: {}", cardNum);
         Card card     = findCardOrThrow(cardNum);
         String oldVal = auditService.serializeCard(card);
-        card.setActiveStatus(CardStatus.INACTIVE);
+        card.setActiveStatus(CardStatus.N);
         cardRepository.save(card);
         auditService.logDelete("CARD", cardNum, oldVal);
     }
