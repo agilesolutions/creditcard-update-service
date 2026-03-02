@@ -1,5 +1,4 @@
-// test/service/CardServiceTest.java
-package com.agilesolutoins.card.service;
+package com.agilesolutions.card.service;
 
 import com.agilesolutions.card.domain.dto.*;
 import com.agilesolutions.card.domain.entity.Card;
@@ -7,6 +6,7 @@ import com.agilesolutions.card.domain.enums.CardStatus;
 import com.agilesolutions.card.exception.*;
 import com.agilesolutions.card.mapper.CardMapper;
 import com.agilesolutions.card.repository.CardRepository;
+import com.agilesolutions.card.service.CardServiceImpl;
 import com.agilesolutions.card.util.CardConstants;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -147,4 +147,13 @@ class CardServiceTest {
         when(cardRepository.findByCardNum("9999999999999999"))
                 .thenReturn(Optional.empty());
 
-        assert
+        when(cardMapper.toResponseDto(any())).thenReturn(sampleResponse);
+
+        assertThatThrownBy(() -> cardService.getCardByNum("9999999999999999"))
+                .isInstanceOf(CardNotFoundException.class)
+                .satisfies(ex -> assertThat(
+                        ((CardNotFoundException) ex).getErrorCode())
+                        .isEqualTo(CardConstants.ERR_CARD_NOT_FOUND));
+
+    }
+}

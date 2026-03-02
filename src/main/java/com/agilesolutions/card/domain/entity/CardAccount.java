@@ -2,6 +2,8 @@
 package com.agilesolutions.card.domain.entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import lombok.*;
 import org.springframework.data.annotation.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

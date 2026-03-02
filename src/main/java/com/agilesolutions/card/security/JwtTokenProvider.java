@@ -1,4 +1,3 @@
-// security/JwtTokenProvider.java
 package com.agilesolutions.card.security;
 
 import io.jsonwebtoken.*;
